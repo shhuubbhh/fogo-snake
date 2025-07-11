@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Fogo Snake Game</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
       background: #000;
@@ -20,13 +21,18 @@
       font-size: 18px;
       padding: 5px;
     }
+    p{
+      font-size: 30px;
+    }
   </style>
 </head>
 <body>
-  <h1>Snake Game</h1>
+  <p>Snake Game</p>
   <input type="text" id="usernameInput" placeholder="Username">
   <button onclick="startGame()">Start Game</button>
   <p id="scoreText"></p>
+  <img src="fire-logo.webp" alt="Fire Logo"
+    class="fixed right-[-280px] top-1/2 transform -translate-y-1/2 max-w-[1000px] opacity-80 pointer-events-none z-0" />
   <canvas id="gameCanvas" width="500" height="500"></canvas>
 
   <script>
