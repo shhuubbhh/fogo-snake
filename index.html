@@ -6,8 +6,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
-      background: #000;
-      color: white;
+      background-color: #020617;
+      color: black;
       text-align: center;
       font-family: sans-serif;
     }
@@ -18,23 +18,39 @@
       border: 2px solid #fff;
     }
     input {
-      font-size: 18px;
+      font-size: 25px;
       padding: 5px;
     }
     p{
-      font-size: 30px;
+      color: white;
+      font-size: 25px;
+    }
+    .butt{
+      background-color: #020617;
+      color: antiquewhite;
+      margin: 10px;
+      text-align: center;
+    }
+    #startBtn {
+      margin-top: 5px;
+      padding: 5px 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      color: rgb(255, 255, 255);
+      background-color: #fc2a00;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
   <p>Fogo Snake Game</p>
   <input type="text" id="usernameInput" placeholder="Username">
-  <button onclick="startGame()">Start Game</button>
+  <button id="startBtn" onclick="startGame()">Start Game</button>
   <p id="scoreText"></p>
   <img src="fire-logo.webp" alt="Fire Logo"
     class="fixed right-[-280px] top-1/2 transform -translate-y-1/2 max-w-[1000px] opacity-80 pointer-events-none z-0" />
   <canvas id="gameCanvas" width="500" height="500"></canvas>
-
+  
   <script>
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
