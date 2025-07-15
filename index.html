@@ -12,11 +12,13 @@
       font-family: sans-serif;
     }
     canvas {
-      background: black;
-      display: block;
-      margin: 20px auto;
-      border: 2px solid #fff;
-    }
+    background: #111;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid #fff;
+    max-width: 100%;
+    height: auto;
+  }
     input {
       font-size: 25px;
       padding: 5px;
@@ -50,6 +52,7 @@
   <img src="fire-logo.webp" alt="Fire Logo"
     class="fixed right-[-280px] top-1/2 transform -translate-y-1/2 max-w-[1000px] opacity-80 pointer-events-none z-0" />
   <canvas id="gameCanvas" width="500" height="500"></canvas>
+
   
   <script>
   const canvas = document.getElementById("gameCanvas");
@@ -88,6 +91,8 @@
     food.x = Math.floor(Math.random() * (canvas.width / size)) * size;
     food.y = Math.floor(Math.random() * (canvas.height / size)) * size;
   }
+canvas.width = Math.min(window.innerWidth, 700);
+canvas.height = canvas.width; // keep square
 
   function draw() {
     ctx.fillStyle = "#111";
@@ -136,6 +141,41 @@
       requestAnimationFrame(gameLoop);
     }, 150);
   }
+let touchStartX = 0;
+let touchStartY = 0;
+
+canvas.addEventListener("touchstart", e => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+});
+
+canvas.addEventListener("touchend", e => {
+  const touchEndX = e.changedTouches[0].clientX;
+  const touchEndY = e.changedTouches[0].clientY;
+  const dxTouch = touchEndX - touchStartX;
+  const dyTouch = touchEndY - touchStartY;
+
+  if (Math.abs(dxTouch) > Math.abs(dyTouch)) {
+    if (dxTouch > 0 && dx === 0) {
+      dx = size;
+      dy = 0;
+    } else if (dxTouch < 0 && dx === 0) {
+      dx = -size;
+      dy = 0;
+    }
+  } else {
+    if (dyTouch > 0 && dy === 0) {
+      dx = 0;
+      dy = size;
+    } else if (dyTouch < 0 && dy === 0) {
+      dx = 0;
+      dy = -size;
+    }
+  }
+});
+document.body.addEventListener('touchmove', function (e) {
+  e.preventDefault();
+}, { passive: false });
 
   document.addEventListener("keydown", e => {
     if (e.key === "ArrowUp" && dy === 0) {
