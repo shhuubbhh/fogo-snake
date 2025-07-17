@@ -152,15 +152,19 @@ window.addEventListener('resize', () => {
       snake.pop();
     }
   }
+let lastRenderTime = 0;
+const snakeSpeed = 6; // moves per second (adjust for smoothness)
 
-  function gameLoop() {
-    if (!running) return;
-    setTimeout(() => {
-      move();
-      draw();
-      requestAnimationFrame(gameLoop);
-    }, 150);
-  }
+function gameLoop(currentTime) {
+  if (!running) return;
+  window.requestAnimationFrame(gameLoop);
+  const secondsSinceLastRender = (currentTime - lastRenderTime) / 1000;
+  if (secondsSinceLastRender < 1 / snakeSpeed) return;
+  lastRenderTime = currentTime;
+  move();
+  draw();
+}
+
 let touchStartX = 0;
 let touchStartY = 0;
 
