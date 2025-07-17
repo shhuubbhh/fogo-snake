@@ -162,12 +162,14 @@ window.addEventListener('resize', () => {
 let touchStartX = 0;
 let touchStartY = 0;
 
-canvas.addEventListener("touchstart", e => {
-  touchStartX = e.touches[0].clientX;
-  touchStartY = e.touches[0].clientY;
-});
+document.body.addEventListener("touchstart", e => {
+  if (e.touches.length > 0) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }
+}, { passive: true });
 
-canvas.addEventListener("touchend", e => {
+document.body.addEventListener("touchend", e => {
   const touchEndX = e.changedTouches[0].clientX;
   const touchEndY = e.changedTouches[0].clientY;
   const dxTouch = touchEndX - touchStartX;
@@ -190,7 +192,8 @@ canvas.addEventListener("touchend", e => {
       dy = -size;
     }
   }
-});
+}, { passive: true });
+
 document.body.addEventListener('touchmove', function (e) {
   e.preventDefault();
 }, { passive: false });
