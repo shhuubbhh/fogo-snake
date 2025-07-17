@@ -97,9 +97,12 @@
   }
 
   function placeFood() {
-    food.x = Math.floor(Math.random() * (canvas.width / size)) * size;
-    food.y = Math.floor(Math.random() * (canvas.height / size)) * size;
-  }
+  const cols = Math.floor(canvas.width / size);
+  const rows = Math.floor(canvas.height / size);
+  food.x = Math.floor(Math.random() * cols) * size;
+  food.y = Math.floor(Math.random() * rows) * size;
+}
+
 canvas.width = Math.min(window.innerWidth, 700);
 canvas.height = canvas.width;
 
@@ -128,7 +131,7 @@ window.addEventListener('resize', () => {
     // Game over conditions
     if (
   head.x < 0 || head.y < 0 ||
-  head.x + size > canvas.width || head.y + size > canvas.height ||
+  head.x > canvas.width - size || head.y > canvas.height - size ||
   snake.some(seg => seg.x === head.x && seg.y === head.y)
 ) {
       alert(`Game Over! ${username}'s Final Score: ${score}`);
