@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Fogo Snake Game</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <style>
     body {
       background-color: #020617;
@@ -11,6 +13,7 @@
       text-align: center;
       font-family: sans-serif;
     }
+
     canvas {
     background: #111;
     display: block;
@@ -20,7 +23,7 @@
     height: auto;
   }
     input {
-      font-size: 25px;
+      font-size: 18px;
       padding: 5px;
     }
     p{
@@ -92,7 +95,13 @@
     food.y = Math.floor(Math.random() * (canvas.height / size)) * size;
   }
 canvas.width = Math.min(window.innerWidth, 700);
-canvas.height = canvas.width; // keep square
+canvas.height = canvas.width;
+
+window.addEventListener('resize', () => {
+  canvas.width = Math.min(window.innerWidth, 700);
+  canvas.height = canvas.width;
+});
+
 
   function draw() {
     ctx.fillStyle = "#111";
